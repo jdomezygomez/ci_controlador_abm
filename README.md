@@ -18,7 +18,14 @@ otras acciones en función a las nececidades de la aplicación.
 
 Características:
     - Cualquier propiedad pública (public) creada en esta clase Nuevo_Controlador, es visible en la capa de la vista. En forma
-      predeterminada, existen las siguiente propiedades públicas que se trasladan a la vista: _id, _select, _join, _order, _titulo,
-      _pag, _pagination, _modelo, _modelos, _seleccionados, ....
+      predeterminada, existen las siguiente propiedades públicas que se trasladan a la vista: _id, _titulo, _pag, _pagination, _modelo, 
+      _modelos, _seleccionados, _filtros, _busqueda_rapida, _accion
       
-    - Posee una propiedad $_datos_session que mantiene los datos 
+    - Posee una propiedad $_datos_session, un array que enumera las propiedades del controlador que se mantienen en _SESSION, en forma
+      predeterminada, mantiene las siguientes propiedades de la clase en SESSION: _pag, _filtros, _busqueda_rapida
+      
+    - Se cargan los siguientes helpers: form, html, url
+    
+    - Se cargan las siguientes librerías: pagination , table , session, form_validation
+    
+    - Se carga también: database.
