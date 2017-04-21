@@ -1,6 +1,6 @@
 # ci_controlador_abm
 Una clase derivada de CI_Controller para CodeIgniter, especializada en operaciones ABM (CRUD). Esta clase debe ser alojada en cualquier  
-proyecto CodeIgniter bajo la carpeta BASE_PATH\application\core\MY_Controller.php.
+proyecto CodeIgniter bajo la carpeta BASEPATH\application\core\MY_Controller.php.
 
 Cada nuevo controlador que se cree en el proyecto, debe derivar de esta nueva clase:
 
@@ -9,8 +9,8 @@ Cada nuevo controlador que se cree en el proyecto, debe derivar de esta nueva cl
         ...
     }
 
-El nombre de la clase es importante, debe coincidir con el nombre de un modelo alojado en BASE_PATH\models\Cualquier_modelo.php.
-A su vez, este modelo debe dirivar de otra clase extendida alojada en BASE_PATH\core\MY_Model.php, ambas clases colaboran entre si
+El nombre de la clase es importante, debe coincidir con el nombre de un modelo alojado en BASEPATH\models\Cualquier_modelo.php.
+A su vez, este modelo debe dirivar de otra clase extendida alojada en BASEPATH\core\MY_Model.php, ambas clases colaboran entre si
 para llevar a cabo las tareas de ABM (Altas,Bajas,Modificaciones) también llamadas CRUD por su sigla en ingles.
 
 En forma predefinida, se encuentras las acciones "index,editar,edit_varios,agregar,eliminar,elim_varios" y obviamente se pueden crear
@@ -26,6 +26,4 @@ Características:
       
     - Se cargan los siguientes helpers: form, html, url
     
-    - Se cargan las siguientes librerías: pagination , table , session, form_validation
-    
-    - Se carga también: database.
+    - Se cargan las siguientes librerías: pagination , table , session, form_validatio
