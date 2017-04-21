@@ -45,18 +45,6 @@ class MY_Controller extends CI_Controller {
     /* La pagina apuntada por la clase Pagination */
     public $_pag;
     
-    /* 
-     * El tamaño de la pagina, coincidente con el atribtuo per_pag
-     * de pagination
-     */
-    public $_per_pag;
-    
-    /*
-     * El controlador calcula el valor ordinal del primer elemento de la
-     * pagina mostrada y el utlimo elemento de la misma.
-     */
-    public $_pag_inicio, $_pag_fin;
-    
     /*
      * Los datos que se pasan a la vista
      */
@@ -78,7 +66,7 @@ class MY_Controller extends CI_Controller {
         );
     
     protected $_datos_session = array(
-        '_pag', 'per_pag', '_filtros', 
+        '_pag', 'per_pag', '_filtros', '_busqueda_rapida'
     );
     
     /*
