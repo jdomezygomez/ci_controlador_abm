@@ -167,6 +167,10 @@ class MY_Controller extends CI_Controller {
         $this->inicio();
     }
     
+    /*
+     * Método reservado al desarrollador de la nueva clase para configurar el controlador, por ejemplo configurar la
+     * lista de datos que se obtiene en la acción index a través de las propiedades _select, _join, _order, etc
+     */
     public function inicio() {
         
     }
@@ -401,6 +405,11 @@ class MY_Controller extends CI_Controller {
         return;
     }
     
+    /*
+     * Estos métodos públicos (con prefijo accion_) se reservan para que el desarrollador de la clase, incluya su propio
+     * código, para complementar el método homónimo protegido sin el prefijo _accion, el controlador llama a estos métodos
+     * luego de ejecutar el método protgegido y previo a despachar la vista.
+     */
     public function accion_index() {
         
     }
