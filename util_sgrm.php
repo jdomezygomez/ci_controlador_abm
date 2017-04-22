@@ -46,7 +46,7 @@ if ( ! function_exists('get_fecha_habil')) {
 
         // A la fecha obtenida, la someto a la tabla Feriado
         $ci =& get_instance();
-        $ci->load('db');
+        $ci->load->database();
 
         while($feriado = $ci->db->select('*')
             ->from('feriado')
@@ -96,7 +96,7 @@ if ( ! function_exists('es_fecha_habil')) {
                 break;
             default:
                 $ci =& get_instance();
-                $ci->load('db');
+	        $ci->load->database();
                 $fila = $ci->db->where(array('fericod'=>sql_datetime($fecha)))
                         ->get('feriado')
                         ->row();
@@ -111,7 +111,7 @@ if ( ! function_exists('cargar_ajuste')) {
     
     function cargar_ajuste($ajcod, $fecha=NULL) {
         $ci =& get_instance();
-        $ci->load('db');
+        $ci->load->database();
         
         $where = array('ajcod' => $ajcod);
         if ($fecha !== NULL) {
@@ -327,8 +327,8 @@ if ( ! function_exists('es_una_infraccion')) {
     
     function es_una_infraccion($tcprbcod, $cprbnro) {
         $result = array();
-        $ci = get_instance();
-        $ci->load('db');
+        $ci =& get_instance();
+        $ci->load->database();
         $where = array(
             'actatcprbc' => $tcprbcod, 
             'actacprbnr' => $cprbnro
@@ -356,7 +356,7 @@ if ( ! function_exists('get_moneda_convertida')) {
     
     function get_moneda_convertida($mndCod, $monto) {
         $ci =& get_instance();
-        $ci->load('db');
+        $ci->load->database();
         $resultado = $monto;
         
         $moneda = $ci->db->select('mndoper,mndfactor')
@@ -386,7 +386,7 @@ if ( ! function_exists('get_parametro')) {
     function get_parametro($prmcod, $predeterminado=NULL) {
     
         $ci =& get_instance();
-        $ci->load('db');
+        $ci->load->database();
         $result = $predeterminado;
         $param = $ci->db->from('params')
                 ->where(array('prmcod' => strtoupper($prmcod)))
@@ -405,7 +405,7 @@ if ( ! function_exists('get_ultimo_numero')) {
     
     function get_ultimo_numero($numerador) {
         $ci =& get_instance();
-        $ci->load('db');
+        $ci->load->database();
         $fila = $ci->db->get('unuunu')
                 ->from('unumero')
                 ->where(array('unucod' => strtoupper($numerador)))
@@ -428,7 +428,7 @@ if ( ! function_exists('solicitar_numero')) {
     
     function solicitar_numero($numerador) {
         $ci =& get_instance();
-        $ci->load('db');
+        $ci->load->database();
         $db = $ci->db;
         $result = 1;
         $db->set('unuunu', 'unuunu+unuinter', FALSE);
