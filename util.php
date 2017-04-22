@@ -6,10 +6,12 @@ if ( ! function_exists('hoy')) {
     
     function hoy($forma=null) {
         $result = '';
-        if (is_null($forma))
+        if (is_null($forma)) {
             $result = date('Y-m-d') . ' 00:00:00';
-        else
+        }
+        else {
             $result = date($forma);
+        }
         return $result;
     }
     
@@ -19,10 +21,12 @@ if ( ! function_exists('hora')) {
     
     function hora($forma=null) {
         $result = '';
-        if (is_null($forma))
+        if (is_null($forma)) {
             $result = date('H:i:s');
-        else
+        }
+        else {
             $result = date($forma);
+        }
         return $result;
     }
     
@@ -30,12 +34,14 @@ if ( ! function_exists('hora')) {
 
 if ( ! function_exists('ahora')) {
     
-    function ahora($forma=null) {
+    function ahora($forma=NULL) {
         $result = '';
-        if (is_null($forma))
+        if (is_null($forma)) {
             $result = date('Y-m-d H:i:s');
-        else
+        }
+        else {
             $result = date($forma);
+        }
         return $result;
     }
     
@@ -43,21 +49,23 @@ if ( ! function_exists('ahora')) {
 
 if ( ! function_exists('anteayer')) {
     
-    function anteayer($forma=null) {
-        $result = sumarDias(hoy(), -2);
+    function anteayer($forma=NULL) {
+        $result = sumar_dias(hoy(), -2);
         return $result;
     }
 
 }
 if ( ! function_exists('ayer')) {
     
-    function ayer($forma=null) {
+    function ayer($forma=NULL) {
         $f = strtotime(hoy('Y-m-d') . '00:00:00');
         $f--;
-        if (is_null($forma))
+        if (is_null($forma)) {
             $result = date('Y-m-d', $f);
-        else
+        }
+        else {
             $result = date($forma,  $f);
+        }
         return $result;
     }
     
@@ -67,18 +75,20 @@ if ( ! function_exists('mañana')) {
     
     /**
      * Calcula una nueva fecha, sumándole un día a la fecha actual, utiliza la
-     * función sumarDias(hoy(),1).
+     * función sumar_dias(hoy(),1).
      * 
      * @return string
      *      La nueva fecha en formato Y-m-d.
      */
-    function mañana($forma=null) {
+    function mañana($forma=NULL) {
         $f = strtotime(hoy('Y-m-d') . '23:59:59');
         $f++;
-        if (is_null($forma))
+        if (is_null($forma)) {
             $result = date('Y-m-d', $f);
-        else
+        }
+        else {
             $result = date($forma,  $f);
+        }
         return $result;
     }
     
@@ -88,13 +98,13 @@ if ( ! function_exists('pasado_mañana')) {
     
     /**
      * Calcula una nueva fecha, sumándole dos días a la fecha actual, utiliza la
-     * función sumarDias(hoy(),2).
+     * función sumar_dias(hoy(),2).
      * 
      * @return string
      *      La nueva fecha en formato Y-m-d.
      */
     function pasado_mañana() {
-        $result = sumarDias(hoy(), 2);
+        $result = sumar_dias(hoy(), 2);
         return $result;
     }
     
@@ -103,8 +113,9 @@ if ( ! function_exists('pasado_mañana')) {
 if ( ! function_exists('dia')) {
     
     function dia($fecha=NULL) {
-        if (empty($fecha))
+        if (empty($fecha)) {
             $fecha = hoy();
+        }
         return (int)date('d', strtotime($fecha));
     }
     
@@ -147,10 +158,12 @@ if ( ! function_exists('sumar_dias')) {
      */
     function sumar_dias($fecha, $dias=1) {
         $f = strtotime($fecha);
-        if ($dias>0)
+        if ($dias>0) {
             $nuevaFecha = strtotime("+$dias days", $f);
-        else
+        }
+        else {
             $nuevaFecha = strtotime("-$dias days", $f);
+        }
         //echo $nueva_fecha, " ";
         return date('Y-m-d', $nuevaFecha);
     }
@@ -173,10 +186,12 @@ if ( ! function_exists('sumar_meses')) {
      */
     function sumar_meses($fecha, $meses=1) {
         $f = strtotime($fecha);
-        if ($meses>0)
+        if ($meses>0) {
             $nuevaFecha = strtotime("+$meses month", $f);
-        else
+        }
+        else {
             $nuevaFecha = strtotime("-$meses month", $f);
+        }
         //echo $nueva_fecha, " ";
         return date('Y-m-d', $nuevaFecha);
     }
@@ -195,9 +210,9 @@ if ( ! function_exists('pdm')) {
      * @return string
      *      La fecha del primer día del mes en formato Y-m-d
      */
-    function pdm($fecha=null) {
+    function pdm($fecha=NULL) {
         // Retrona el primer dia del mes segun la fecha dada
-        if (is_null($fecha)) $fecha = hoy();
+        if (is_null($fecha)) {$fecha = hoy();}
         return substr($fecha, 0, 7) . '-01';
     }
 
@@ -214,9 +229,9 @@ if ( ! function_exists('udm')) {
      * @return string
      *      La fecha del último día del mes en formato Y-m-d
      */
-    function udm($fecha=null) {
+    function udm($fecha=NULL) {
         //funcion sinonimo de udiames()
-        if (is_null($fecha)) $fecha = hoy();
+        if (is_null($fecha)) {$fecha = hoy();}
         $f      = strtotime($fecha);
         $uanio  = date('Y', $f);
         $umes   = date('m', $f);
@@ -258,9 +273,10 @@ if ( ! function_exists('pda')) {
      * @return string
      *      La fecha del primer día del año en formato Y-m-d
      */
-    function pda($fecha=null) {
-        if (is_null($fecha))
+    function pda($fecha=NULL) {
+        if (is_null($fecha)) {
             $fecha = hoy();
+        }
         return date('Y', strtotime($fecha)) . '-01-01';
     }
     
@@ -278,9 +294,10 @@ if ( ! function_exists('uda')) {
      * @return string
      *      La fecha del último día del año en formato Y-m-d
      */
-    function uda($fecha=null) {
-        if (is_null($fecha))
+    function uda($fecha=NULL) {
+        if (is_null($fecha)) {
             $fecha = hoy();
+        }
         return date('Y', strtotime($fecha)) . '-12-31';
     }
     
@@ -297,8 +314,9 @@ if ( ! function_exists('es_fecha_nula')) {
     function es_fecha_nula($fecha) {
         $resultado = FALSE;
         //$strFecha = date('Y-m-d H:i:s', strtotime($fecha));
-        if (empty($fecha) || is_string($fecha) && substr($fecha, 0, 4) == '1969')
+        if (empty($fecha) || is_string($fecha) && substr($fecha, 0, 4) == '1969') {
             $resultado = TRUE;
+        }
         return $resultado;
     }
     
@@ -421,11 +439,11 @@ if ( ! function_exists('fecha_larga')) {
             }
             break;
         }
-        if  (!is_null($formato)
+        if  (! is_null($formato)
             && (
                     stripos('abrev',$formato) !== FALSE
                         || stripos('abreviado',$formato) !== FALSE
-                    )
+               )
             )
         {
             $dia_semana = substr($dia_semana, 0, 3);
@@ -564,7 +582,7 @@ if ( ! function_exists('dv')) {
             }
             $suma %= 10;
             if ($suma == 0) {
-                        $result = '0';
+                $result = '0';
             }
             else {
                 $result = sprintf('%d', 10 - $suma);
@@ -595,10 +613,12 @@ if ( ! function_exists('aplicar_dv')) {
     
     function aplicar_dv($valor, $rutina) {
         $dv = dv($valor, $rutina);
-        if (is_string($valor))
+        if (is_string($valor)) {
             $result = trim($valor) . $dv;
-        if (is_numeric($valor))
+        }
+        if (is_numeric($valor)) {
             $result = $valor * 10 + int($dv);
+        }
         return $result;
     }
     
