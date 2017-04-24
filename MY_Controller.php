@@ -1,8 +1,8 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller {
-
     /* Todos los atributos publicos se alojan previamente en el arreglo
      * $this->_datos_vista y luego se trasladan a la vista 
      */
@@ -56,13 +56,13 @@ class MY_Controller extends CI_Controller {
      * array('nombre_accion' => 'nombre_formulario')
      */
     protected $_forms = array(
-            'index'     => 'index',
-            'agregar'   => 'form',
-            'editar'    => 'form',
-            'edit_varios' => 'edit_varios',
-            'eliminar'  => 'eliminar',
-            'elim_varios' => 'elim_varios',
-            'ver'       => 'form',
+            'index'         => 'index',
+            'agregar'       => 'form',
+            'editar'        => 'form',
+            'edit_varios'   => 'edit_varios',
+            'eliminar'      => 'eliminar',
+            'elim_varios'   => 'elim_varios',
+            'ver'           => 'form',
         );
     
     protected $_datos_session = array(
@@ -162,8 +162,7 @@ class MY_Controller extends CI_Controller {
     public function inicio() {
         
     }
-
-    protected function index() {
+    public function index() {
         $this->_accion = 'index';
         $this->cargar_modelo();
         
@@ -199,7 +198,6 @@ class MY_Controller extends CI_Controller {
         
         // LLama a la accion del usuario
         $this->accion_index();
-
         if ( ! empty($this->_vista)) {
             $this->despachar_vista();
         }
@@ -222,7 +220,6 @@ class MY_Controller extends CI_Controller {
     protected function editar($id=NULL) {
         $this->_accion = 'editar';
         if ($this->input->method(TRUE) == 'POST') {
-
             if ($this->input->Post('submit[salir]')) {
                 $this->salir();
                 return;
@@ -314,8 +311,7 @@ class MY_Controller extends CI_Controller {
     
     protected function recuperar_lista() {
         $this->db->select($this->_select)
-            ->from($this->_id);            
-
+            ->from($this->_modelo->get_table());            
         if ($this->pagination->per_pag > 0) {
             $this->db->offset($this->_desde);
         }
@@ -325,15 +321,26 @@ class MY_Controller extends CI_Controller {
         if ( ! empty($this->_order)) {
             $this->db->order_by($this->_order);
         }
-
-        if ( ! empty($this->_join)) {
-            if (is_array($this->_join)) {
-                foreach($this->_join as $join) {
-                    $this->db->join($join);
+        if ( ! empty($this->_join) && is_array($this->_join)) {
+            foreach($this->_join as $join) {
+                if ( is_array($join)) {
+                    // $this->_join es un array de arrays con varios joins
+                    if (count($join) == 2) {
+                        $this->db->join($join[0], $join[1]);
+                    }
+                    if (count($elem) == 3) {
+                        $this->db->join($join[0], $join[1], $join[2]);
+                    }
+                } else {
+                    // $this->_join es un array ordinal con un unico join
+                    if (count($this->_join) == 2) {
+                        $this->db->join($this->join[0], $this->_join[1]);
+                    }
+                    if (count($this->_join) == 3) {
+                        $this->db->join($this->_join[0], $this->_join[1], 
+                                $this->_join[2]);
+                    }
                 }
-            }
-            if (is_string($this->_join)) {
-                $this->db->join($this->_join);
             }
         }
         if ( ! empty($this->_campos_busqueda_rapida)
