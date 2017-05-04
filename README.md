@@ -30,3 +30,6 @@ Características:
 
     - Procesa en forma predeterminada, cualquier formulario enviado con los siguientes comandos traidos desde el requerimiento:
       submit[agregar], submit[editar], submit[edit_varios], submit[eliminar], submit[elim_varios], submit[salir]
+
+Tag: [codeigniter controller] 
+[jamierumbelow], [avenirer/codeigniter-match-cli]
